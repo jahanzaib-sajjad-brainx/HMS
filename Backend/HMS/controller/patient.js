@@ -4,13 +4,13 @@ const usersModel=require("../models/user")
 const bcrypt = require('bcrypt')
 
 let addPatient=async (req,res)=>{
-    if(req.body.uname && req.body.password && req.body.name && req.body.number && req.body.address  && req.body.age  && req.body.disease && req.body.status)
+    if(req.body.useremail && req.body.password && req.body.name && req.body.number && req.body.address  && req.body.age  && req.body.disease && req.body.status)
     {
         let encryptedPassword = await bcrypt.hash(req.body.password,10)
         let userinfo={
             role:"patient",
             deactivate:false,
-            uname:req.body.uname,
+            useremail:req.body.useremail,
             password:encryptedPassword
         }
         let patientinfo={
