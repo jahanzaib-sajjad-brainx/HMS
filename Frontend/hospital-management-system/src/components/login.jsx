@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
-import Link from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 function LoginPage(props) {
-    const [userName, setuserName]=useState('');
+    const [userEmail, setuserEmail]=useState('');
     const [userPassword, setUserPassword]=useState('');
     const [invalidCredentials, setInvalidCredentials] = useState(false)
 
-    const handleUsernameChange=(e)=>{
-        setuserName(e.target.value);
+    const handleEmailChange=(e)=>{
+        setuserEmail(e.target.value);
     }
     const handlePasswordChange=(e)=>{
         setUserPassword(e.target.value);
@@ -21,12 +21,12 @@ function LoginPage(props) {
     
       try {
         axios.post('/user/verify-user',{
-          username: userName,
+          useremail: userEmail,
           password: userPassword
         })
          .then(function (response) {
             if (response.data.Status === "found") {
-              localStorage.setItem("uname", response.data.uname)
+              localStorage.setItem("userEmail", response.data.uemail)
 
             }
             else {
@@ -48,8 +48,8 @@ function LoginPage(props) {
           <div className='center bg-secondary border border-secondary border-2'>
               <Form onSubmit={handleLogin}>
                   <Form.Group className="my-3" controlId="formBasicEmail">
-                      <Form.Label >User Name</Form.Label>
-                      <Form.Control value={userName} type="text" placeholder="Enter Username..." onChange={handleUsernameChange} required />
+                      <Form.Label >Email</Form.Label>
+                      <Form.Control value={userEmail} type="Email" placeholder="Enter Email..." onChange={handleEmailChange} required />
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -63,7 +63,7 @@ function LoginPage(props) {
                   <div className='text-center'>
                       <Button variant="primary" type="submit" className='bg-dark rounded-pill'>Login</Button>
                       
-                      {/* <Link to="/forgetPassword"></Link><div className='my-3 text-light'>Forget your password?</div><Link/> */}
+                      <Link to="/forgetPassword"><div className='my-3 text-light'>Forget your password?</div></Link>
                   </div>
               </Form>
           </div>

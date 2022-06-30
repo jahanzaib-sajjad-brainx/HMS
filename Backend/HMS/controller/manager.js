@@ -4,14 +4,14 @@ const usersModel=require("../models/user")
 const bcrypt = require('bcrypt')
 
 let addManager= async(req,res)=>{
-    if(req.body.username && req.body.password && req.body.name && req.body.number && req.body.address)
+    if(req.body.useremail && req.body.password && req.body.name && req.body.number && req.body.address)
     {
 
         let encrypt = await bcrypt.hash(req.body.password,10)
         let userinfo={
             role:"manager",
             deactivate:false,
-            username:req.body.username,
+            useremail:req.body.useremail,
             password:encrypt
         }
         let managerinfo={
